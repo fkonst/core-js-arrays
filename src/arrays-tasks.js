@@ -423,8 +423,15 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (elem, index) =>
+    Array.from({ length: n }, (item, i) => {
+      if (index === i) {
+        return 1;
+      }
+      return 0;
+    })
+  );
 }
 
 /**
@@ -455,8 +462,10 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map(
+    (elem) => `#${elem.toString(16).toUpperCase().padStart(6, '0')}`
+  );
 }
 
 /**
@@ -593,8 +602,17 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (arr.length < 2) {
+    return arr;
+  }
+  if (arr.length % 2 === 0) {
+    return [...arr.slice(arr.length / 2), ...arr.slice(0, arr.length / 2)];
+  }
+  const head = arr.slice(Math.floor(arr.length / 2) + 1);
+  const middle = arr[Math.floor(arr.length / 2)];
+  const tail = arr.slice(0, Math.floor(arr.length / 2));
+  return [...head, middle, ...tail];
 }
 
 module.exports = {
